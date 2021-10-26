@@ -8,6 +8,10 @@ namespace depth_filter
 	DepthFilter::DepthFilter() : Node("depth_filter"), k_{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
 			got_info_{false}, max_height_{2.0}, min_height_{0.1}, max_distance_{5.0}, min_distance_{0.5},
 			point_{0.0, 0.0, 0.0}, is_bigendian_{false}, depths_{0}{
+			max_height_ = this->declare_parameter("max_height", max_height_);
+			min_height_ = this->declare_parameter("min_height", min_height_);
+			max_distance_ = this->declare_parameter("max_distance", max_distance_);
+			min_distance_ = this->declare_parameter("min_distance", min_distance_);
 			depth_sub_ = this->create_subscription<sensor_msgs::msg::Image>
 					("depth_sub_topic", 10, std::bind(&DepthFilter::depthCallback, this, _1));
 			camera_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>
